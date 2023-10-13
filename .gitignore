@@ -130,6 +130,8 @@ venv.bak/
 
 
 .bat
+.exe
+.cfg
 # Spyder project settings
 .spyderproject
 .spyproject
