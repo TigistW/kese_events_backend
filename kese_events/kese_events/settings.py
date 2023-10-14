@@ -42,9 +42,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'authentication.apps.AuthenticationConfig',
+    'events.apps.EventsConfig',
+    'transaction.apps.TransactionConfig',
     'rest_framework',
     'corsheaders',
     'rest_framework_simplejwt',
+    'cloudinary',
+     'django_chapa',
 ]
 
 MIDDLEWARE = [
@@ -176,4 +180,10 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'wondimneht@gmail.com'
 EMAIL_HOST_PASSWORD = "niif fjxi dmhn ljtw"
-# EMAIL_HOST_PASSWORD = 'niiffjxidmhnljtw$'
+
+
+# CHAPA_SECRET = os.environ.get('CHAPA_SECRET')
+# CHAPA_API_URL = os.environ.get('CHAPA_API_URL', 'https://api.chapa.co')
+# CHAPA_WEBHOOK_URL = os.environ.get('CHAPA_WEBHOOK_URL')
+# CHAPA_API_VERSION = os.environ.get('CHAPA_API_VERSION', 'v1')
+# CHAPA_TRANSACTION_MODEL = 'django_chapa.ChapaTransaction'

@@ -18,5 +18,8 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('auth/', include("authentication.urls"))
+    path('auth/', include("authentication.urls")),
+    path('event/', include("events.urls")),
+    path('chapa-hook', include('django_chapa.urls')),
+    path('transaction', include('transaction.urls'))
 ]
