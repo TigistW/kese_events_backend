@@ -65,10 +65,10 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
             "data": {
                 # "email": email,
                 "token": token,
-                "user_profile": user_profile.data,
+            #     "user_profile": user_profile.data,
             },
         },
-        print(response_data[0])
+        # print(response_data[0])
         return response_data[0]
     
     

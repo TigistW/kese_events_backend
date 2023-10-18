@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from datetime import timedelta
+import os
 from pathlib import Path
 
 from rest_framework.fields import datetime
@@ -44,11 +45,12 @@ INSTALLED_APPS = [
     'authentication.apps.AuthenticationConfig',
     'events.apps.EventsConfig',
     'transaction.apps.TransactionConfig',
+    'userprofile.apps.UserprofileConfig',
     'rest_framework',
     'corsheaders',
     'rest_framework_simplejwt',
     'cloudinary',
-     'django_chapa',
+    #  'django_chapa',
 ]
 
 MIDDLEWARE = [
@@ -56,7 +58,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -167,12 +169,15 @@ SIMPLE_JWT = {
     # Add more settings as needed
 }
 
+
+
 # CORS_ALLOWED_ORIGINS = [
 #     "https://example.com",
 #     "http://localhost:8000",  # Replace with the URL of your frontend app
 # ]
 
 CORS_ALLOW_ALL_ORIGINS = True
+CSRF_COOKIE_SECURE = False
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -182,8 +187,9 @@ EMAIL_HOST_USER = 'wondimneht@gmail.com'
 EMAIL_HOST_PASSWORD = "niif fjxi dmhn ljtw"
 
 
-# CHAPA_SECRET = os.environ.get('CHAPA_SECRET')
-# CHAPA_API_URL = os.environ.get('CHAPA_API_URL', 'https://api.chapa.co')
-# CHAPA_WEBHOOK_URL = os.environ.get('CHAPA_WEBHOOK_URL')
-# CHAPA_API_VERSION = os.environ.get('CHAPA_API_VERSION', 'v1')
-# CHAPA_TRANSACTION_MODEL = 'django_chapa.ChapaTransaction'
+
+CHAPA_SECRET = "CHASECK_TEST-DUEoawlCdGysNBxNPkdVWcFQP0TqeJbE"
+CHAPA_API_URL = os.environ.get('CHAPA_API_URL', 'https://api.chapa.co')
+CHAPA_WEBHOOK_URL = os.environ.get('CHAPA_WEBHOOK_URL')
+CHAPA_API_VERSION = os.environ.get('CHAPA_API_VERSION', 'v1')
+CHAPA_TRANSACTION_MODEL = 'transaction.ChapaTransaction'

@@ -70,7 +70,7 @@ class UserProfile(AbstractBaseUser):
         return True
     
 class UserAddress(models.Model):
-    user = models.OneToOneField('UserProfile', on_delete=models.CASCADE, related_name='address')
+    user = models.OneToOneField('UserProfile', on_delete=models.DO_NOTHING, related_name='address')
     street_address = models.CharField(max_length=255)
     city = models.CharField(max_length=100)
     state = models.CharField(max_length=100)

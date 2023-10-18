@@ -127,3 +127,21 @@ class VerifyOTP(APIView):
                 'message': 'OTP verification failed',
             }
             return Response(response_data, status=status.HTTP_400_BAD_REQUEST)
+
+class UserDetailView(APIView):
+    permission_classes = [IsAuthenticated]
+    def get(self, request):
+        user = request.user  # The authenticated user
+        user_data = {
+            'id': user.id,
+            'firstName': user.first_name,
+            'lastName': user.last_name,
+            'email': user.email,
+            'profilePicture':user.profile_picture_url,
+            'phone_number':user.phone_number
+        }
+        response_data = {
+            "data":user_data,
+            "statusCode":200
+        }
+        return Response(response_data, status=status.HTTP_200_OK)
