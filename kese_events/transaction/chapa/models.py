@@ -11,7 +11,7 @@ class ChapaStatus(models.TextChoices):
     FAILED = 'failed', 'FAILED'
 
 
-class ChapaTransactionMixin(TicketTransaction):
+class ChapaTransactionMixin(models.Model):
     # transaction = models.OneToOneField('Transaction', on_delete=models.CASCADE, related_name='transaction')
     
     # id = models.UUIDField(primary_key=True, default=uuid4)
@@ -42,4 +42,5 @@ class ChapaTransactionMixin(TicketTransaction):
 
 class ChapaTransaction(ChapaTransactionMixin):
     end_date = models.DateTimeField(max_length=100, default='default_value')
+    chapa_id = models.UUIDField(primary_key=True, default=uuid4)
     pass

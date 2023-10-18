@@ -75,6 +75,7 @@ class SignUpEmailAPIView(APIView):
     
 @method_decorator(csrf_exempt, name='dispatch')
 class CustomTokenObtainPairView(TokenObtainPairView):
+    permission_classes = [AllowAny]
     serializer_class = CustomTokenObtainPairSerializer
     
 class CheckEmailView(APIView):
@@ -138,7 +139,7 @@ class UserDetailView(APIView):
             'lastName': user.last_name,
             'email': user.email,
             'profilePicture':user.profile_picture_url,
-            'phone_number':user.phone_number
+            'phoneNumber': str(user.phone_number)
         }
         response_data = {
             "data":user_data,

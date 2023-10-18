@@ -50,7 +50,7 @@ class InitiatePaymentView(View):
     def post(self, request):
         try:
             data = json.loads(request.body)
-
+            # print(data)
             # Save the transaction details to your database
             transaction = ChapaTransaction(
                 amount=data['amount'],
@@ -63,16 +63,20 @@ class InitiatePaymentView(View):
                 description=data['description'],
                 tax_ref=data['tax_ref']
             )
-            transaction.save()
+            
+            try:
+                transaction.save()
+            except:
+                print("jjjj")
             
             # Initiate the payment through Chapa API
-            chapa_response = ChapaAPI.send_request(transaction)
-            
-            # # Check if the initiation was successful
-            if chapa_response.get('status') == 'success':
-                transaction.status = ChapaTransaction.PENDING
-                transaction.checkout_url = chapa_response.get('data').get('checkout_url')
-                transaction.save()
+            # chapa_response = ChapaAPI.send_request(transaction)
+            # # print(chapa_response)
+            # # # Check if the initiation was successful
+            # if chapa_response.get('status') == 'success':
+            #     transaction.status = ChapaTransaction.PENDING
+            #     transaction.checkout_url = chapa_response.get('data').get('checkout_url')
+            #     transaction.save()
 
             #     # Send a verification request to Chapa API
             #     verification_response = ChapaAPI.verify_payment(transaction)
@@ -83,7 +87,7 @@ class InitiatePaymentView(View):
             #     return JsonResponse({'error': 'Initiation failed', 'initiation_response': chapa_response}, status=400)
             
             # Return the Chapa response as JSON
-            return JsonResponse(chapa_response)
+            # return JsonResponse(chapa_response)
 
         except json.decoder.JSONDecodeError:
             return JsonResponse({'error': "Invalid Json Body"}, status=400)
