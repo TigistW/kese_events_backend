@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
-from phonenumber_field.modelfields import PhoneNumberField
+
 
 class UserProfileManager(BaseUserManager):
     """
@@ -50,7 +50,9 @@ class UserProfile(AbstractBaseUser):
               max_length=150,    
     )
     profile_picture_url = models.URLField(max_length=200, blank=True, null=True)
-    phone_number = PhoneNumberField(blank=True, null=True)
+    phone_number = models.CharField(
+              max_length=150,null=True, blank = True
+    )
     
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)

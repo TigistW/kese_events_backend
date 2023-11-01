@@ -42,6 +42,7 @@ class SignUpEmailAPIView(APIView):
             serializer.is_valid(raise_exception=True)
             
             user = serializer.save()
+            
             # Generate a random 4-digit OTP
             otp = str(random.randint(1000, 9999))
             

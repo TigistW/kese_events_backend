@@ -9,6 +9,8 @@ import qrcode
 from PIL import Image
 from io import BytesIO
 
+from transaction.chapa.models import ChapaTransaction
+
 class PaymentMethodChoices(models.TextChoices):
     AMOLE = 'amole', 'AMOLE'
     HELLO_CASH = 'hello_cash', 'HELLO_CASH'
@@ -20,9 +22,9 @@ class AttendanceMethodChoices(models.TextChoices):
     ONLINE = 'online', 'ONLINE'
 
 class TicketTransaction(BaseModelMixin):
-    chapa_transaction = models.OneToOneField('ChapaTransaction', on_delete=models.CASCADE, related_name='transaction')
-    event = models.ForeignKey(Event, on_delete=models.DO_NOTHING, related_name='events')
-    user = models.ForeignKey(UserProfile, on_delete=models.DO_NOTHING, related_name='user')
+    # chapa_transaction = models.ForeignKey(ChapaTransaction, on_delete=models.DO_NOTHING, related_name='ticket_transaction')
+    event = models.ForeignKey(Event, on_delete=models.DO_NOTHING, related_name='transactions')
+    user = models.ForeignKey(UserProfile, on_delete=models.DO_NOTHING, related_name='tickets')
     payment_method = models.CharField(max_length=255, choices=PaymentMethodChoices.choices, default=PaymentMethodChoices.CHAPA)
     attendance_method = models.CharField(max_length=255, choices=AttendanceMethodChoices.choices, default=AttendanceMethodChoices.INPERSON)
     is_vip = models.BooleanField(default=False)

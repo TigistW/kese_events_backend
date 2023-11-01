@@ -59,40 +59,30 @@ class InitiatePaymentView(View):
                 phone_number=data['phone_number'],
                 first_name=data['first_name'],
                 last_name=data['last_name'],
-                payment_title=data['payment_title'],
-                description=data['description'],
-                tax_ref=data['tax_ref']
+                tax_ref=data['tax_ref']   
             )
-            
             try:
                 transaction.save()
-            except:
-                print("jjjj")
+            except Exception as e:
+                print(f"Error saving transaction: {str(e)}")
             
+                
             # Initiate the payment through Chapa API
-            # chapa_response = ChapaAPI.send_request(transaction)
-            # # print(chapa_response)
-            # # # Check if the initiation was successful
-            # if chapa_response.get('status') == 'success':
-            #     transaction.status = ChapaTransaction.PENDING
-            #     transaction.checkout_url = chapa_response.get('data').get('checkout_url')
-            #     transaction.save()
+            try:
+                chapa_response = ChapaAPI.send_request(transaction)
+                print(chapa_response)
+            except Exception as e:
+                print({str(e)})
 
-            #     # Send a verification request to Chapa API
-            #     verification_response = ChapaAPI.verify_payment(transaction)
-
-            #     # Return both initiation and verification responses as JSON
-            #     return JsonResponse({'initiation_response': chapa_response, 'verification_response': verification_response})
-            # else:
-            #     return JsonResponse({'error': 'Initiation failed', 'initiation_response': chapa_response}, status=400)
-            
-            # Return the Chapa response as JSON
-            # return JsonResponse(chapa_response)
+            data = JsonResponse(chapa_response)
+            return data
 
         except json.decoder.JSONDecodeError:
             return JsonResponse({'error': "Invalid Json Body"}, status=400)
         except Exception as e:
             return HttpResponseBadRequest(f'Error: {e}')
+        
+    
 
 
 # @csrf_exempt

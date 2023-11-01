@@ -28,7 +28,7 @@ class ChapaAPI:
         return API_URL + '/' + API_VERSION.replace('/', '')
 
     @classmethod
-    def send_request(cls, transaction: models.ChapaTransactionMixin, update_record=True) -> dict:
+    def send_request(cls, transaction: models.ChapaTransaction, update_record=True) -> dict:
         data = {
             'amount': transaction.amount,
             'currency': transaction.currency,
@@ -65,6 +65,7 @@ class ChapaAPI:
     
     @classmethod
     def verify_payment(cls, tax_ref) -> dict:
+        print("inverification")
         response = requests.get(
             f'{cls.get_base_url()}/transaction/verify/{tax_ref}',
             headers=cls.get_headers(),

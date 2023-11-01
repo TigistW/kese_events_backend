@@ -14,7 +14,10 @@ class EventListAPIView(generics.ListAPIView):
     permission_classes = [] 
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
+        
+        print(queryset)
         serializer = self.get_serializer(queryset, many=True)
+        # print(serializer.data)
         data = {
             "data": serializer.data,
             "statusCode": status.HTTP_200_OK
@@ -82,4 +85,11 @@ class TagListAPIView(generics.ListAPIView):
             "statusCode": status.HTTP_200_OK
         }
         return Response(data, status=status.HTTP_200_OK)
+    
+class EventCreateAPIView(generics.CreateAPIView):
+    permission_classes = []
+    queryset = Event.objects.all()
+    serializer_class = serializers.EventCreateSerializer
+    
+
     

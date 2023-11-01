@@ -98,7 +98,7 @@ DATABASES = {
     'USER': 'postgres',
     'HOST': 'localhost',
     'PASSWORD': '0527',
-    'NAME':'keseevent',
+    'NAME':'kese',
 }
 }
 
@@ -193,3 +193,14 @@ CHAPA_API_URL = os.environ.get('CHAPA_API_URL', 'https://api.chapa.co')
 CHAPA_WEBHOOK_URL = os.environ.get('CHAPA_WEBHOOK_URL')
 CHAPA_API_VERSION = os.environ.get('CHAPA_API_VERSION', 'v1')
 CHAPA_TRANSACTION_MODEL = 'transaction.ChapaTransaction'
+
+
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+CLOUDINARY_URL = "cloudinary://325313962791648:mfXEUKr66mvK1PlPtCTILjMUpPs@dzh3wp15p"
+cloudinary.config(
+    cloud_name="dzh3wp15p",
+    api_key="325313962791648",
+    api_secret="mfXEUKr66mvK1PlPtCTILjMUpPs"
+)

@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.urls import path
 
-from events.views import EventDetailAPIView, EventListAPIView, EventListByTagsAPIView, TagListAPIView, UpcomingEventListAPIView
+from events.views import EventCreateAPIView, EventDetailAPIView, EventListAPIView, EventListByTagsAPIView, TagListAPIView, UpcomingEventListAPIView
 
 app_name = 'events'
 urlpatterns = [
@@ -11,5 +11,6 @@ urlpatterns = [
     path('upcoming-events/', UpcomingEventListAPIView.as_view(), name='upcoming-events'),
     path('tags/', TagListAPIView.as_view(), name='tags-list'),
     path('events-by-tags-list/', EventListByTagsAPIView.as_view(), name='events-by-tags-list'),
+    path('create-event/', EventCreateAPIView.as_view(), name='create-event-api'),
 ]
 
